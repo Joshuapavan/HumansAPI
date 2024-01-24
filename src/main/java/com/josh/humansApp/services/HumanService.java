@@ -1,12 +1,11 @@
 package com.josh.humansApp.services;
 
 import com.josh.humansApp.dtos.HumanDto;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
 
 public interface HumanService {
 
-    List<HumanDto> getAllHumans();
+    Page<HumanDto> getAllHumans(int page, int per);
 
     HumanDto getHuman(Long id);
 

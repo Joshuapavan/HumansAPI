@@ -5,6 +5,8 @@ import com.josh.humansApp.entities.Human;
 import com.josh.humansApp.repositories.HumansRepository;
 import com.josh.humansApp.services.HumanService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,10 +19,12 @@ public class HumanServiceImpl implements HumanService {
     @Autowired
     HumansRepository humansRepository;
     @Override
-    public List<HumanDto> getAllHumans() {
-        List<Human> humanList =  this.humansRepository.findAll();
+    public Page<HumanDto> getAllHumans(int pageNo, int pageSize) {
+        PageRequest pageRequest = PageRequest.of(pageNo, pageSize);
+        Page<Human> humanPage =  this.humansRepository.findAll(pageRequest);
 
-        return humanList.stream().map(human -> this.humanToHumanDto(human)).collect(Collectors.toList());
+//        return humanList.stream().map(human -> this.humanToHumanDto(human)).collect(Collectors.toList());
+        return humanPage.map(human -> this.humanToHumanDto(human));
     }
 
     @Override
