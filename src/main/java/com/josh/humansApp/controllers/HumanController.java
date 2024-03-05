@@ -15,7 +15,7 @@ public class HumanController {
     @Autowired
     HumanService humanService;
 
-    @GetMapping("/{page}/{per}")
+    @GetMapping("/{page}/{per}")  // index
     public ResponseEntity<Page<HumanDto>> getAllHumans(@PathVariable int page, @PathVariable int per){
         return new ResponseEntity<>(this.humanService.getAllHumans(page, per), HttpStatus.OK);
     }
